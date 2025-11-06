@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  # NIFTY Alerter Service (uses ntfy.sh cloud service)
+  nifty-alerter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nifty-alerter
+    environment:
+      - NTFY_URL=https://ntfy.sh
+      - NTFY_TOPIC=niftyy
+      - TZ=Asia/Kolkata
+      - ALERT_CHECK_TIME=16:00
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped

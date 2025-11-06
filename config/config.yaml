@@ -1,0 +1,16 @@
+alert_service:
+  check_time: "16:00"  # 4 PM daily check
+  timezone: "Asia/Kolkata"
+
+indices:
+  - symbol: "^CRSLDX"  # NIFTY 500 symbol in Yahoo Finance
+    name: "NIFTY 500"
+    lookback_days: 7
+    alert_triggers:
+      - type: "percentage_drop"
+        threshold: 2.0  # 2% drop
+
+ntfy:
+  url: "https://ntfy.sh"
+  topic: "niftyy"
+  priority: "high"
