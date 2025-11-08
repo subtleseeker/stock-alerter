@@ -8,7 +8,8 @@
       "Bash(source:*)",
       "Bash(pip install:*)",
       "Bash(python test_notifications.py:*)",
-      "Bash(python -m:*)"
+      "Bash(python -m:*)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []

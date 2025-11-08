@@ -6,7 +6,7 @@ import time
 from pathlib import Path
 from .config import Settings, load_config
 from .alert_service import AlertService
-from .data_fetchers import YahooFinanceDataFetcher
+from .data_fetchers import FallbackDataFetcher
 from .notifiers import NtfyNotifier
 
 # Configure logging
@@ -31,8 +31,8 @@ def main():
     config_path = os.getenv('CONFIG_PATH', 'config/config.yaml')
     config = load_config(config_path)
 
-    # Initialize components
-    data_fetcher = YahooFinanceDataFetcher()
+    # Initialize components with fallback data fetcher
+    data_fetcher = FallbackDataFetcher()
     notifier = NtfyNotifier(
         ntfy_url=settings.ntfy_url,
         topic=settings.ntfy_topic,
