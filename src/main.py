@@ -52,6 +52,14 @@ def main():
             alert_service.run_check(config)
         except Exception as e:
             logger.error(f"Error during alert check: {e}", exc_info=True)
+            # Send error notification
+            try:
+                notifier.send_error(
+                    title="NIFTY Alerter - Critical Error",
+                    message=f"Alert check failed with error:\n{str(e)}"
+                )
+            except Exception as notify_error:
+                logger.error(f"Failed to send error notification: {notify_error}")
 
     # Schedule the job
     check_time = config.get('alert_service', {}).get('check_time', settings.alert_check_time)

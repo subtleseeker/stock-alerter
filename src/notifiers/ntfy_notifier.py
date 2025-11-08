@@ -56,3 +56,73 @@ class NtfyNotifier(Notifier):
         except Exception as e:
             logger.error(f"Failed to send alert via ntfy: {e}")
             return False
+
+    def send_status(self, title: str, message: str) -> bool:
+        """
+        Send a status/info message via ntfy.
+
+        Args:
+            title: Message title
+            message: Message body
+
+        Returns:
+            True if notification sent successfully, False otherwise
+        """
+        try:
+            url = f"{self.ntfy_url}/{self.topic}"
+
+            headers = {
+                "Title": title,
+                "Priority": "default",
+                "Tags": "white_check_mark,information_source"
+            }
+
+            response = requests.post(
+                url,
+                data=message.encode('utf-8'),
+                headers=headers,
+                timeout=10
+            )
+
+            response.raise_for_status()
+            logger.info(f"Status message sent successfully to {url}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send status message via ntfy: {e}")
+            return False
+
+    def send_error(self, title: str, message: str) -> bool:
+        """
+        Send an error notification via ntfy.
+
+        Args:
+            title: Error title
+            message: Error message
+
+        Returns:
+            True if notification sent successfully, False otherwise
+        """
+        try:
+            url = f"{self.ntfy_url}/{self.topic}"
+
+            headers = {
+                "Title": title,
+                "Priority": "high",
+                "Tags": "x,rotating_light"
+            }
+
+            response = requests.post(
+                url,
+                data=message.encode('utf-8'),
+                headers=headers,
+                timeout=10
+            )
+
+            response.raise_for_status()
+            logger.info(f"Error notification sent successfully to {url}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send error notification via ntfy: {e}")
+            return False

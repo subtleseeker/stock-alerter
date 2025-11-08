@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m py_compile:*)",
+      "Bash(docker --version:*)",
+      "Bash(make build:*)",
+      "Bash(python3:*)",
+      "Bash(source:*)",
+      "Bash(pip install:*)",
+      "Bash(python test_notifications.py:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
