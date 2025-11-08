@@ -3,8 +3,8 @@ alert_service:
   timezone: "Asia/Kolkata"
 
 indices:
-  - symbol: "^CRSLDX"  # NIFTY 500 symbol in Yahoo Finance
-    name: "NIFTY 500"
+  - symbol: "^NSEI"  # NIFTY 50 symbol in Yahoo Finance
+    name: "NIFTY 50"
     lookback_days: 7
     alert_triggers:
       - type: "percentage_drop"

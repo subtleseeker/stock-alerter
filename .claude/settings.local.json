@@ -7,7 +7,8 @@
       "Bash(python3:*)",
       "Bash(source:*)",
       "Bash(pip install:*)",
-      "Bash(python test_notifications.py:*)"
+      "Bash(python test_notifications.py:*)",
+      "Bash(python -m:*)"
     ],
     "deny": [],
     "ask": []

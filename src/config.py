@@ -13,9 +13,11 @@ class Settings(BaseSettings):
     alert_check_time: str = "16:00"
     timezone: str = "Asia/Kolkata"
 
-    class Config:
-        env_file = ".env"
-        case_sensitive = False
+    model_config = {
+        "env_file": ".env",
+        "case_sensitive": False,
+        "extra": "ignore"  # Ignore extra env vars like TZ
+    }
 
 
 def load_config(config_path: str = "config/config.yaml") -> Dict[str, Any]:
