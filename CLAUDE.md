@@ -33,4 +33,4 @@ Remember to always run the service after building to really see that it works.
 Use context7 MCP to get updated information about anything.
 
 I have cloned an external repository that might be useful to find the data
-sources and how to use them. It is present in repos/ directory.
+sources and how to use them. It is present in repo/ directory.
