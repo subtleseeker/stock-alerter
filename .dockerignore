@@ -14,3 +14,7 @@ build
 README.md
 .DS_Store
 *.log
+venv/
+test_*.py
+*.md
+.claude/
