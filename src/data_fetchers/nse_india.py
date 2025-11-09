@@ -1,6 +1,6 @@
 """NSE India data fetcher implementation"""
 import logging
-import requests
+from curl_cffi import requests
 import time
 import urllib.parse
 from datetime import datetime, timedelta
@@ -46,11 +46,11 @@ class NSEIndiaDataFetcher(DataFetcher):
         try:
             # Visit homepage first to get cookies
             self.session.headers.update(self.headers)
-            self.session.get(self.base_url, timeout=20)
+            self.session.get(self.base_url, timeout=20, impersonate="chrome120")
 
             # Sometimes visiting market data pages helps get all cookies
             time.sleep(1)
-            self.session.get(f"{self.base_url}/market-data/live-equity-market", timeout=20)
+            self.session.get(f"{self.base_url}/market-data/live-equity-market", timeout=20, impersonate="chrome120")
 
             logger.info("NSE India session initialized with cookies")
         except Exception as e:
@@ -77,7 +77,8 @@ class NSEIndiaDataFetcher(DataFetcher):
             response = self.session.get(
                 url,
                 headers=self.headers,
-                timeout=10
+                timeout=10,
+                impersonate="chrome120"
             )
 
             if response.status_code == 200:
@@ -133,7 +134,7 @@ class NSEIndiaDataFetcher(DataFetcher):
             # Small delay before request to avoid rate limiting
             time.sleep(0.5)
 
-            response = self.session.get(url, timeout=20)
+            response = self.session.get(url, timeout=20, impersonate="chrome120")
             response.raise_for_status()
 
             data = response.json()
