@@ -9,7 +9,8 @@
       "Bash(pip install:*)",
       "Bash(python test_notifications.py:*)",
       "Bash(python -m:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(docker compose:*)"
     ],
     "deny": [],
     "ask": []
