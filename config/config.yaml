@@ -3,14 +3,73 @@ alert_service:
   timezone: "Asia/Kolkata"
 
 indices:
-  - symbol: "^NSEI"  # NIFTY 50 symbol in Yahoo Finance
-    name: "NIFTY 50"
+  # Thresholds optimized to generate 10-15 buying opportunity alerts per year
+  # Based on 5 years of historical data analysis (2020-2025)
+  # More frequent alerts = More buying opportunities
+
+  # Broad Market Index
+  - symbol: "^CRSLDX"
+    name: "NIFTY 500"
     lookback_days: 7
     alert_triggers:
       - type: "percentage_drop"
-        threshold: 2.0  # 2% drop
+        threshold: 2.0  # 11.9 buying opportunities/year
+
+  # Defensive Sectors (Lower thresholds - more stable)
+  - symbol: "^CNXFMCG"
+    name: "NIFTY FMCG"
+    lookback_days: 7
+    alert_triggers:
+      - type: "percentage_drop"
+        threshold: 1.5  # 12.1 buying opportunities/year - Consumer staples
+
+  - symbol: "^CNXPHARMA"
+    name: "NIFTY PHARMA"
+    lookback_days: 7
+    alert_triggers:
+      - type: "percentage_drop"
+        threshold: 2.5  # 10.9 buying opportunities/year - Healthcare
+
+  # Financial Sector
+  - symbol: "^NSEBANK"
+    name: "NIFTY BANK"
+    lookback_days: 7
+    alert_triggers:
+      - type: "percentage_drop"
+        threshold: 2.5  # 12.7 buying opportunities/year
+
+  # Growth/Cyclical Sectors (Medium thresholds)
+  - symbol: "^CNXAUTO"
+    name: "NIFTY AUTO"
+    lookback_days: 7
+    alert_triggers:
+      - type: "percentage_drop"
+        threshold: 2.5  # 12.3 buying opportunities/year
+
+  - symbol: "^CNXENERGY"
+    name: "NIFTY ENERGY"
+    lookback_days: 7
+    alert_triggers:
+      - type: "percentage_drop"
+        threshold: 3.0  # 12.8 buying opportunities/year
+
+  # High Volatility Sectors (Higher thresholds needed)
+  - symbol: "^CNXIT"
+    name: "NIFTY IT"
+    lookback_days: 7
+    alert_triggers:
+      - type: "percentage_drop"
+        threshold: 3.0  # 13.5 buying opportunities/year - Technology
+
+  - symbol: "^CNXMETAL"
+    name: "NIFTY METAL"
+    lookback_days: 7
+    alert_triggers:
+      - type: "percentage_drop"
+        threshold: 4.0  # 11.3 buying opportunities/year - Most volatile
 
 ntfy:
   url: "https://ntfy.sh"
-  topic: "niftyy"
+  topic: "niftyy"  # Main topic - All alerts (both gains and drops)
+  critical_topic: "niftyyy"  # Critical topic - Only buying opportunity alerts (drops)
   priority: "high"

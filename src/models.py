@@ -26,3 +26,4 @@ class Alert(BaseModel):
     message: str
     timestamp: datetime
     trigger_type: str
+    threshold: Optional[float] = None  # Threshold that triggered this alert

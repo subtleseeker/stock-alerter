@@ -36,7 +36,8 @@ def main():
     notifier = NtfyNotifier(
         ntfy_url=settings.ntfy_url,
         topic=settings.ntfy_topic,
-        priority=config.get('ntfy', {}).get('priority', 'high')
+        priority=config.get('ntfy', {}).get('priority', 'high'),
+        critical_topic=config.get('ntfy', {}).get('critical_topic')
     )
 
     # Create service

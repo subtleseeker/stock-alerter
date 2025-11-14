@@ -107,7 +107,8 @@ class PercentageDropTrigger(AlertTrigger):
                 percentage_change=max_change,
                 message=message,
                 timestamp=datetime.now(),
-                trigger_type="percentage_drop"
+                trigger_type="percentage_drop",
+                threshold=self.threshold_percentage
             )
 
         logger.info(f"{index_name}: No data available for comparison")
