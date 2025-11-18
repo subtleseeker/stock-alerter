@@ -107,6 +107,12 @@ class NtfyNotifier(Notifier):
                     "Tags": "rotating_light,money_with_wings,chart_with_downwards_trend"
                 }
 
+                logger.info(
+                    "Sending to critical topic: drop %.2f%% >= threshold %.2f%%",
+                    abs(alert.percentage_change),
+                    alert.threshold if alert.threshold is not None else float('nan')
+                )
+
                 response = requests.post(
                     critical_url,
                     data=message_body.encode('utf-8'),  # Use message_body with threshold
