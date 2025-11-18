@@ -79,8 +79,25 @@ class NtfyNotifier(Notifier):
             logger.error(f"Failed to send alert to main topic via ntfy: {e}")
             success = False
 
-        # Send to critical topic only if it's a drop AND critical topic is configured
+        # Send to critical topic only if it's a drop AND
+        # the drop magnitude meets/exceeds the alert threshold.
+        # This ensures 'niftyyy' only gets true buying opportunities.
         if is_drop and self.critical_topic:
+            meets_threshold = False
+            try:
+                if alert.threshold is not None:
+                    meets_threshold = abs(alert.percentage_change) >= float(alert.threshold)
+            except Exception:
+                meets_threshold = False
+
+            if not meets_threshold:
+                logger.info(
+                    "Skipping critical topic: drop %.2f%% below threshold %.2f%%",
+                    abs(alert.percentage_change),
+                    alert.threshold if alert.threshold is not None else float('nan')
+                )
+                return success
+
             try:
                 critical_url = f"{self.ntfy_url}/{self.critical_topic}"
 
